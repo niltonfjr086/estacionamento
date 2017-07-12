@@ -1,0 +1,64 @@
+package br.com.linux_park.model.dao;
+
+import br.com.linux_park.model.bo.TipoVaga;
+import br.com.linux_park.model.db.TipoVagaDB;
+import br.com.linux_park.util.BaseDAO;
+import java.util.List;
+
+/**
+ *
+ * @author Aluno
+ */
+public class TipoVagaDAO implements BaseDAO<TipoVaga, TipoVagaDB> {
+
+    @Override
+    public TipoVagaDB converterParaDB(TipoVaga objetoBO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TipoVaga converterParaBO(TipoVagaDB objetoDB) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean existente(String chaveCandidata) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean existente(TipoVaga objetoBO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TipoVaga get(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public TipoVaga get(String chaveCandidata) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Long inserir(TipoVaga objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean alterar(TipoVaga objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean apagar(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<TipoVaga> listar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+}

@@ -1,0 +1,17 @@
+package br.com.linux_park.model.vo;
+
+import br.com.linux_park.model.bo.Estaciona;
+import br.com.linux_park.model.bo.TipoVaga;
+import br.com.linux_park.model.bo.Veiculo;
+
+/**
+ *
+ * @author Aluno
+ */
+public class ConfiguracoesVO {
+
+    Estaciona estacionar;
+    Veiculo veiculo;
+    TipoVaga tipoVaga;
+
+}

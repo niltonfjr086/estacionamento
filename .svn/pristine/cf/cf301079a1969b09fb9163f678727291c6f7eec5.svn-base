@@ -1,0 +1,86 @@
+package br.com.linux_park.model.dao;
+
+import br.com.linux_park.model.bo.VeiculoBO;
+import br.com.linux_park.model.db.VeiculoDB;
+import br.com.linux_park.util.BaseDAO;
+import br.com.linux_park.util.ConexaoDB;
+import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class VeiculoDAO implements BaseDAO<VeiculoBO, VeiculoDB> {
+
+    @Override
+    public VeiculoDB converterParaDB(VeiculoBO objetoBO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public VeiculoBO converterParaBO(VeiculoDB objetoDB) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean existente(String chaveCandidata) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean existente(VeiculoBO objetoBO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public VeiculoBO get(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public VeiculoBO get(String chaveCandidata) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Long inserir(VeiculoDB objeto) {
+//        if(existente()){
+//            return null;
+//        }
+        String sql = "INSERT INTO estacionamento.veiculo (Placa, id_modelo, id_marca, id_tipo, id_cor) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = ConexaoDB.getConnection().prepareStatement(sql)) {
+
+            stmt.setString(1, objeto.getPlaca());
+            stmt.setInt(2, objeto.getIdModelo());
+            stmt.setInt(3, objeto.getIdMarca());
+            stmt.setInt(4, objeto.getIdTipo());
+            stmt.setInt(5, objeto.getIdCor());
+
+            stmt.executeUpdate();
+            return 1L;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public Boolean alterar(VeiculoBO objeto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Boolean apagar(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<VeiculoBO> listar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+}

@@ -1,0 +1,63 @@
+package br.com.linux_park.model.db;
+
+public class VeiculoDB {
+
+    private String placa;
+    private int idModelo;
+    private int idMarca;
+    private int idTipo;
+    private int idCor;
+
+    public VeiculoDB(String placa, int idModelo, int  idMarca, int  idTipo, int  idCor) {
+        this.placa = placa;
+        this.idModelo = idModelo;
+        this.idMarca = idMarca;
+        this.idTipo = idTipo;
+        this.idCor = idCor;
+    }
+
+    public VeiculoDB() {
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public int  getIdModelo() {
+        return idModelo;
+    }
+
+    public void setIdModelo(int  idModelo) {
+        this.idModelo = idModelo;
+    }
+
+    public int  getIdMarca() {
+        return idMarca;
+    }
+
+    public void setIdMarca(int  idMarca) {
+        this.idMarca = idMarca;
+    }
+
+    public int  getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int  idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public int  getIdCor() {
+        return idCor;
+    }
+
+    public void setIdCor(int  idCor) {
+        this.idCor = idCor;
+    }
+    
+    
+}

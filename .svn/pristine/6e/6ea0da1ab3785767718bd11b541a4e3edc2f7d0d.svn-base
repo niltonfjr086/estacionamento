@@ -1,0 +1,33 @@
+package br.com.linux_park.util;
+
+import java.util.List;
+
+/**
+ *
+ * @author Aluno
+ * @param <O>
+ * @param <D>
+ */
+public interface BaseDAO<O,D> {
+    
+    public D converterParaDB(O objetoBO);
+    
+    public O converterParaBO(D objetoDB);
+    
+    public Boolean existente(String chaveCandidata);
+    
+    public Boolean existente(O objetoBO);
+    
+    public O get(Long id);
+    
+    public O get(String chaveCandidata);
+
+    public Long inserir(D objeto);
+
+    public Boolean alterar(O objeto);
+
+    public Boolean apagar(Long id);
+
+    public List<O> listar();
+
+}

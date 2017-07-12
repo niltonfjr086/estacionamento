@@ -1,0 +1,46 @@
+package br.com.linux_park.model.dao;
+
+import br.com.linux_park.model.bean.TipoVaga;
+import br.com.linux_park.model.db.TipoVagaDB;
+import br.com.linux_park.util.BaseDAO;
+import br.com.linux_park.util.GenericDAO;
+
+/**
+ *
+ * @author Aluno
+ */
+public class TipoVagaDAO extends GenericDAO<TipoVagaDB, TipoVaga> {
+
+    public TipoVagaDAO() {
+        super(BaseDAO.BANCO[0], "tb_tipovaga", "descricao", new TipoVagaDB(), new TipoVaga());
+    }
+
+    @Override
+    public TipoVagaDB toDB(TipoVaga o) {
+
+        TipoVagaDB e = new TipoVagaDB();
+//        e.setId(o.getId());
+//        e.setNome(o.getNome());
+//        e.setUf(o.getUf());
+//        e.setPais(o.getPais().getId());
+//        e.setRegiao(o.getRegiao());
+//        e.setDtInclusao(o.getDtInclusao());
+
+        return e;
+    }
+
+    @Override
+    public TipoVaga fromDB(TipoVagaDB o) {
+
+        TipoVaga e = new TipoVaga();
+//        e.setId(o.getId());
+//        e.setNome(o.getNome());
+//        e.setUf(o.getUf());
+//        e.setPais(new PaisDAO().getPorId(o.getPais()));
+//        e.setRegiao(o.getRegiao());
+//        e.setDtInclusao(o.getDtInclusao());
+
+        return e;
+    }
+
+}
