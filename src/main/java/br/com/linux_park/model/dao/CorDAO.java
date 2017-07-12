@@ -12,8 +12,9 @@ import br.com.linux_park.util.GenericDAO;
 public class CorDAO extends GenericDAO<CorDB, Cor> {
 
     public CorDAO() {
-        super(BaseDAO.BANCO[0], "tb_cor", "descricao", new CorDB(), new Cor(), new String[]{});
-        //MASSA
+        super(BaseDAO.BANCO[0], "tb_cor", "descricao", new CorDB(), new Cor());
+        
+        //OK
     }
 
     @Override
