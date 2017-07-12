@@ -29,7 +29,7 @@ public class ConexaoDB {
             String tipo = (String) config.get("tipodb");
             if (tipo.equals("mysql")) {
                 this.url = "jdbc:mysql://" + config.getProperty("servidordb") + ":"
-                        + config.get("portadb") + "/estacionamento?serverTimezone=GMT-03:00";
+                        + config.get("portadb") + "/mysql?serverTimezone=GMT-03:00";
             }
 
             this.login = (String) config.get("user");
@@ -37,7 +37,7 @@ public class ConexaoDB {
 
         } catch (IOException ex) {
             Logger.getLogger(ConexaoDB.class.getName()).log(Level.SEVERE, null, ex);
-//            this.url = "jdbc:mysql://localhost:3306/projeto?serverTimezone=GMT-03:00";
+//            this.url = "jdbc:mysql://localhost:3306/mysql?serverTimezone=GMT-03:00";
 //            this.login = "root";
 //            this.senha = "";
         } finally {

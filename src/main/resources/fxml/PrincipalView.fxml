@@ -22,6 +22,11 @@
                   <BorderPane id="brdHistorico" fx:id="brdHistorico" prefHeight="200.0" prefWidth="200.0" />
                </content>
             </Tab>
+            <Tab id="tabConfig" fx:id="tabConfig" onSelectionChanged="#chamaConfigView" text="Configurações">
+               <content>
+                  <BorderPane id="brdConfig" fx:id="brdConfig" prefHeight="200.0" prefWidth="200.0" />
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
    </center>

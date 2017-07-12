@@ -1,17 +1,13 @@
 package br.com.linux_park.controller;
 
-import br.com.linux_park.model.dao.VeiculoDAO;
-import br.com.linux_park.model.db.VeiculoDB;
 import br.com.linux_park.model.vo.EntradaVO;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -96,8 +92,9 @@ public class EntradaViewController implements Initializable {
 
     @FXML
     private void setDadosEntradaView(ActionEvent event) {
+        System.out.println("TESTE 1");
 
-        if (ev.vDAO.existente(inpPlaca.getText())) {
+//        if (ev.vDAO.existente(inpPlaca.getText())) {
 //            ev.setVeiculo(inpPlaca.getText());
 //            lblPlaca.setText(vv.getPlaca());
 //            lblMarcaModelo.setText(vv.getMarca().getNome() + " " + vv.getModelo().getNome());
@@ -106,22 +103,26 @@ public class EntradaViewController implements Initializable {
 //            lblCor.setText(vv.getCor().getNome());
 //            lblCidadeUF.setText(vv.getCidade().getNome() + "/" + vv.getEstado().getUf());
 //            System.out.println(vv.getCondutor().getNome());
-        } else {
-            lblPlaca.setText("Não encontrado");
-            lblMarcaModelo.setText("Não encontrado");
-            lblFabricacaoAnoModelo.setText("Não encontrado");
-            lblCondutor.setText("Não encontrado");
-            lblCor.setText("Não encontrado");
-            lblCidadeUF.setText("Não encontrado");
-            System.out.println("Não encontrado");
-        }
-
+//        } else {
+//            lblPlaca.setText("Não encontrado");
+//            lblMarcaModelo.setText("Não encontrado");
+//            lblFabricacaoAnoModelo.setText("Não encontrado");
+//            lblCondutor.setText("Não encontrado");
+//            lblCor.setText("Não encontrado");
+//            lblCidadeUF.setText("Não encontrado");
+//            System.out.println("Não encontrado");
+//        }
     }
 
     @FXML
-    private void utilizar(ActionEvent event) {
-//        if (ev.vDAO.existente(inpPlaca.getText())) {
+    private void confirmar(ActionEvent event) {
 
+        System.out.println("TESTE 2");
+//       VeiculoDB veiculoA = new VeiculoDB("XXX9998", 1, 1, 1, 1);
+//       VeiculoDAO vd = new VeiculoDAO();
+//       vd.inserir(veiculoA);
+
+//        if (ev.vDAO.existente(inpPlaca.getText())) {
 //            Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //            alert.setTitle("Recibo de entrada");
 //            alert.setHeaderText("Utilizacação ID: " + uvd.inserir(new UtilizacaoVO(vv, new Date())) + "\n"
@@ -131,16 +132,10 @@ public class EntradaViewController implements Initializable {
 //            alert.showAndWait();
 //            mainController.chamaSaidaView();
 //        }
-        
-        System.out.println("TESTE");
-//       VeiculoDB veiculoA = new VeiculoDB("XXX9998", 1, 1, 1, 1);
-       VeiculoDAO vd = new VeiculoDAO();
-
-//       vd.inserir(veiculoA);
     }
 
     @FXML
-    private void limpar(ActionEvent event) {
+    private void cancelarLimpar(ActionEvent event) {
         mainController.chamaEntradaView();
     }
 

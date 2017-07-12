@@ -35,6 +35,10 @@ public class PrincipalViewController implements Initializable {
     private Tab tabHistorico;
     @FXML
     private BorderPane brdHistorico;
+    @FXML
+    private Tab tabConfig;
+    @FXML
+    private BorderPane brdConfig;
 
     /**
      * Initializes the controller class.
@@ -106,6 +110,28 @@ public class PrincipalViewController implements Initializable {
             Parent historico = loader.load();
             brdHistorico.setCenter(historico);
             HistoricoViewController controller = loader.getController();
+            controller.setMainController(this);
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void chamaConfigView(Event event) {
+        if (brdConfig.getCenter() == null) {
+            chamaConfigView();
+        }
+    }
+
+    private void chamaConfigView() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/fxml/ConfigView.fxml"));
+
+            Parent config = loader.load();
+            brdConfig.setCenter(config);
+            ConfigViewController controller = loader.getController();
             controller.setMainController(this);
         } catch (IOException ex) {
             Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);
