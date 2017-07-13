@@ -15,32 +15,30 @@ public class TipoVagaDAO extends GenericDAO<TipoVagaDB, TipoVaga> {
         super(BaseDAO.BANCO[0], "tb_tipovaga", "descricao", new TipoVagaDB(), new TipoVaga());
     }
 
-    @Override
-    public TipoVagaDB toDB(TipoVaga o) {
-
-        TipoVagaDB e = new TipoVagaDB();
+//    @Override
+//    public TipoVagaDB toDB(TipoVaga o) {
+//
+//        TipoVagaDB e = new TipoVagaDB();
 //        e.setId(o.getId());
-//        e.setNome(o.getNome());
-//        e.setUf(o.getUf());
-//        e.setPais(o.getPais().getId());
-//        e.setRegiao(o.getRegiao());
-//        e.setDtInclusao(o.getDtInclusao());
-
-        return e;
-    }
-
-    @Override
-    public TipoVaga fromDB(TipoVagaDB o) {
-
-        TipoVaga e = new TipoVaga();
+//        e.setDescricao(o.getDescricao());
+//        e.setPreco_unitario(o.getPreco_unitario());
+//        e.setQuantidade(o.getQuantidade());
+//        e.setData_inclusao(o.getData_inclusao());
+//
+//        return e;
+//    }
+//
+//    @Override
+//    public TipoVaga fromDB(TipoVagaDB o) {
+//
+//        TipoVaga e = new TipoVaga();
 //        e.setId(o.getId());
-//        e.setNome(o.getNome());
-//        e.setUf(o.getUf());
-//        e.setPais(new PaisDAO().getPorId(o.getPais()));
-//        e.setRegiao(o.getRegiao());
-//        e.setDtInclusao(o.getDtInclusao());
-
-        return e;
-    }
+//        e.setDescricao(o.getDescricao());
+//        e.setPreco_unitario(o.getPreco_unitario());
+//        e.setQuantidade(o.getQuantidade());
+//        e.setData_inclusao(o.getData_inclusao());
+//        
+//        return e;
+//    }
 
 }

@@ -136,7 +136,6 @@ public class PrincipalViewController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
 }

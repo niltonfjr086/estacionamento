@@ -17,6 +17,10 @@ public class Cor {
 
     }
 
+    public Cor(String descricao) {
+        this.descricao = descricao;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,7 +74,7 @@ public class Cor {
 
     @Override
     public String toString() {
-        return "CorDB{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
+        return "Cor{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
     }
 
 }

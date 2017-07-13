@@ -11,21 +11,21 @@ use linuxpark;
 
 create table if not exists linuxpark.tb_tipoveiculo (
 id bigint primary key auto_increment,
-descricao varchar(45) not null,
+descricao varchar(45) not null unique,
 data_inclusao datetime not null,
 data_remocao datetime null
 );
 
 create table if not exists linuxpark.tb_cor (
 id bigint primary key auto_increment,
-descricao varchar(45) not null,
+descricao varchar(45) not null unique,
 data_inclusao datetime not null,
 data_remocao datetime null
 );
 
 create table if not exists linuxpark.tb_marca (
 id bigint primary key auto_increment,
-descricao varchar(45) not null,
+descricao varchar(45) not null unique,
 data_inclusao datetime not null,
 data_remocao datetime null
 );
@@ -33,7 +33,7 @@ data_remocao datetime null
 create table if not exists linuxpark.tb_modelo (
 id bigint primary key auto_increment,
 id_marca bigint not null,
-descricao varchar(45) not null,
+descricao varchar(45) not null unique,
 data_inclusao datetime not null,
 data_remocao datetime null,
 
@@ -42,7 +42,7 @@ data_remocao datetime null,
 
 create table if not exists linuxpark.tb_veiculo (
 id bigint primary key auto_increment,
-placa varchar(45) not null,
+placa varchar(45) not null unique,
 id_tipoveiculo bigint not null,
 id_cor bigint not null,
 id_modelo bigint not null,
@@ -56,7 +56,7 @@ data_remocao datetime null,
 
 create table if not exists linuxpark.tb_tipovaga (
 id bigint primary key auto_increment,
-descricao varchar(50) not null,
+descricao varchar(50) not null unique,
 preco_unitario float not null,
 quantidade int not null,
 data_inclusao datetime not null,
@@ -68,7 +68,6 @@ id bigint primary key auto_increment,
 id_veiculo bigint not null,
 id_tipo_vaga bigint not null,
 preco_total float null,
--- preco_unitario float not null,
 data_entrada datetime not null,
 data_saida datetime null,
 
@@ -77,9 +76,10 @@ data_saida datetime null,
 );
 
 
-SELECT * FROM linuxpark.tb_tipoveiculo;
-SELECT * FROM linuxpark.tb_cor tb_marca;
-SELECT * FROM linuxpark.tb_modelo;
-SELECT * FROM linuxpark.tb_veiculo;
-SELECT * FROM linuxpark.tb_tipovaga;
-SELECT * FROM linuxpark.tb_estaciona;
+-- SELECT * FROM linuxpark.tb_tipoveiculo;
+-- SELECT * FROM linuxpark.tb_cor;
+-- SELECT * FROM linuxpark.tb_marca;
+-- SELECT * FROM linuxpark.tb_modelo;
+-- SELECT * FROM linuxpark.tb_veiculo;
+-- SELECT * FROM linuxpark.tb_tipovaga;
+-- SELECT * FROM linuxpark.tb_estaciona;
