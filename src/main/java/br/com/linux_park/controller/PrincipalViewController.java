@@ -39,6 +39,11 @@ public class PrincipalViewController implements Initializable {
     private Tab tabConfig;
     @FXML
     private BorderPane brdConfig;
+    @FXML
+    private Tab tabEntrada2;
+    @FXML
+    private BorderPane brdEntrada2;
+//    brdEntrada2View
 
     /**
      * Initializes the controller class.
@@ -132,6 +137,27 @@ public class PrincipalViewController implements Initializable {
             Parent config = loader.load();
             brdConfig.setCenter(config);
             ConfigViewController controller = loader.getController();
+            controller.setMainController(this);
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    private void chamaEntrada2View(Event event) {
+        if (brdEntrada2.getCenter() == null) {
+            chamaEntrada2View();
+        }
+    }
+
+    private void chamaEntrada2View() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/fxml/Entrada2View.fxml"));
+
+            Parent config = loader.load();
+            brdEntrada2.setCenter(config);
+            Entrada2ViewController controller = loader.getController();
             controller.setMainController(this);
         } catch (IOException ex) {
             Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);

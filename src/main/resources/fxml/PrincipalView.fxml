@@ -5,29 +5,36 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.linux_park.controller.PrincipalViewController">
-   <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntradaView" text="Entrada">
-               <content>
-                  <BorderPane id="brdEntrada" fx:id="brdEntrada" prefHeight="200.0" prefWidth="200.0" />
-               </content></Tab>
-          <Tab id="tabSaida" fx:id="tabSaida" onSelectionChanged="#chamaSaidaView" text="Saída">
-               <content>
-                  <BorderPane id="brdSaida" fx:id="brdSaida" prefHeight="200.0" prefWidth="200.0" />
-               </content>
-          </Tab>
-            <Tab id="tabHistorico" fx:id="tabHistorico" onSelectionChanged="#chamaHistoricoView" text="Histórico">
-               <content>
-                  <BorderPane id="brdHistorico" fx:id="brdHistorico" prefHeight="200.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-            <Tab id="tabConfig" fx:id="tabConfig" onSelectionChanged="#chamaConfigView" text="Configurações">
-               <content>
-                  <BorderPane id="brdConfig" fx:id="brdConfig" prefHeight="200.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </center>
+    <center>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab id="tabEntrada2" fx:id="tabEntrada2" onSelectionChanged="#chamaEntrada2View" text="Entrada2">
+                    <content>
+                        <BorderPane id="brdEntrada2" fx:id="brdEntrada2" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+                <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntradaView" text="Entrada">
+                    <content>
+                        <BorderPane id="brdEntrada" fx:id="brdEntrada" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+                <Tab id="tabSaida" fx:id="tabSaida" onSelectionChanged="#chamaSaidaView" text="Saída">
+                    <content>
+                        <BorderPane id="brdSaida" fx:id="brdSaida" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+                <Tab id="tabHistorico" fx:id="tabHistorico" onSelectionChanged="#chamaHistoricoView" text="Histórico">
+                    <content>
+                        <BorderPane id="brdHistorico" fx:id="brdHistorico" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+                <Tab id="tabConfig" fx:id="tabConfig" onSelectionChanged="#chamaConfigView" text="Configurações">
+                    <content>
+                        <BorderPane id="brdConfig" fx:id="brdConfig" prefHeight="200.0" prefWidth="200.0" />
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>
