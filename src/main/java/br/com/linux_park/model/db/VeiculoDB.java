@@ -7,7 +7,6 @@ public class VeiculoDB {
 
     private Long id;
     private String placa;
-    private Long id_tipoveiculo;
     private Long id_cor;
     private Long id_modelo;
     private Date data_inclusao;
@@ -26,14 +25,6 @@ public class VeiculoDB {
 
     public void setPlaca(String placa) {
         this.placa = placa;
-    }
-
-    public Long getId_tipoveiculo() {
-        return id_tipoveiculo;
-    }
-
-    public void setId_tipoveiculo(Long id_tipoveiculo) {
-        this.id_tipoveiculo = id_tipoveiculo;
     }
 
     public Long getId_cor() {
@@ -65,7 +56,6 @@ public class VeiculoDB {
         int hash = 7;
         hash = 59 * hash + Objects.hashCode(this.id);
         hash = 59 * hash + Objects.hashCode(this.placa);
-        hash = 59 * hash + Objects.hashCode(this.id_tipoveiculo);
         hash = 59 * hash + Objects.hashCode(this.id_cor);
         hash = 59 * hash + Objects.hashCode(this.id_modelo);
         hash = 59 * hash + Objects.hashCode(this.data_inclusao);
@@ -87,9 +77,6 @@ public class VeiculoDB {
         if (!Objects.equals(this.placa, other.placa)) {
             return false;
         }
-        if (!Objects.equals(this.id_tipoveiculo, other.id_tipoveiculo)) {
-            return false;
-        }
         if (!Objects.equals(this.id_cor, other.id_cor)) {
             return false;
         }
@@ -101,7 +88,7 @@ public class VeiculoDB {
 
     @Override
     public String toString() {
-        return "VeiculoDB{" + "id=" + id + ", placa=" + placa + ", id_tipoveiculo=" + id_tipoveiculo + ", id_cor=" + id_cor + ", id_modelo=" + id_modelo + ", data_inclusao=" + data_inclusao + '}';
+        return "VeiculoDB{" + "id=" + id + ", placa=" + placa + ", id_cor=" + id_cor + ", id_modelo=" + id_modelo + ", data_inclusao=" + data_inclusao + '}';
     }
 
 }

@@ -5,6 +5,10 @@
  */
 package br.com.linux_park.controller;
 
+import br.com.linux_park.model.bean.Cor;
+import br.com.linux_park.model.bean.Marca;
+import br.com.linux_park.model.bean.Modelo;
+import br.com.linux_park.model.bean.TipoVeiculo;
 import br.com.linux_park.model.vo.EntradaVO;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -38,19 +42,19 @@ public class Entrada2ViewController implements Initializable {
     @FXML
     private Label lblMarca;
     @FXML
-    private ComboBox<?> selectOneMarca;
+    private ComboBox<Marca> selectOneMarca;
     @FXML
     private Label lblModelo;
     @FXML
-    private ComboBox<?> selectOneModelo;
+    private ComboBox<Modelo> selectOneModelo;
     @FXML
     private Label lblCor;
     @FXML
-    private ComboBox<?> selectOneCor;
+    private ComboBox<Cor> selectOneCor;
     @FXML
     private Label lblTipo;
     @FXML
-    private ComboBox<?> selectOneTipo;
+    private ComboBox<TipoVeiculo> selectOneTipoVeiculo;
     @FXML
     private Button registrar;
     @FXML
@@ -71,17 +75,26 @@ public class Entrada2ViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ev.verificaDadosIniciais();
+
         habilitarPlacaMask(this.txtPlaca);
+
+        listas();
+        viculaModelosMarca(selectOneMarca);
     }
 
     public void setMainController(PrincipalViewController mainController) {
         this.mainController = mainController;
     }
 
-    private static void habilitarPlacaMask(final TextField inpPlaca) {
+    private void habilitarPlacaMask(final TextField inpPlaca) {
         inpPlaca.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+
+                if (newValue.length() == 8) {
+                    pesquisarPlaca();
+                }
 
                 if (newValue.length() > 0 && newValue.length() < 4) {
 
@@ -112,6 +125,74 @@ public class Entrada2ViewController implements Initializable {
         );
     }
 
+    private void listas() {
+        listaMarcas();
+        listaModelos();
+        listaCores();
+        listaTiposVeiculo();
+    }
+
+    private void listaMarcas() {
+        selectOneMarca.setDisable(true);
+        selectOneMarca.getItems().addAll(ev.marcaDAO.listarTodos());
+//        selectOneMarca.setValue(new Marca("HONDA"));
+    }
+
+    private void viculaModelosMarca(final ComboBox<Marca> newMarca) {
+        newMarca.valueProperty().addListener(new ChangeListener<Marca>() {
+            @Override
+            public void changed(ObservableValue<? extends Marca> observable, Marca oldValue, Marca newValue) {
+                listaModelos();
+            }
+        });
+    }
+
+    private void listaModelos() {
+
+        if (selectOneCor.getItems().size() <= 0 || selectOneCor == null) {
+            selectOneModelo.setDisable(true);
+        }
+
+        if (selectOneMarca.getValue() != null) {
+            selectOneModelo.getItems().clear();
+
+            selectOneModelo.getItems().addAll(
+                    ev.modeloDAO.listarTodos(selectOneMarca.getValue().getId())
+            );
+        }
+    }
+
+    private void listaCores() {
+        selectOneCor.setDisable(true);
+        selectOneCor.getItems().addAll(ev.corDAO.listarTodos());
+    }
+
+    private void listaTiposVeiculo() {
+        selectOneTipoVeiculo.setDisable(true);
+        selectOneTipoVeiculo.getItems().addAll(ev.tipoVeiculoDAO.listarTodos());
+    }
+
+    private void pesquisarPlaca() {
+        System.out.println("CONSULTA");
+        if (ev.veiculoDAO.existente(txtPlaca.getText())) {
+            ev.setVeiculo(ev.veiculoDAO.get(txtPlaca.getText()));
+            System.out.println(ev.getVeiculo());
+
+            selectOneMarca.setValue(ev.getVeiculo().getMarca());
+            listaModelos();
+            selectOneModelo.setValue(ev.getVeiculo().getModelo());
+            selectOneCor.setValue(ev.getVeiculo().getCor());
+            selectOneTipoVeiculo.setValue(ev.getVeiculo().getModelo().getTipoVeiculo());
+
+        }
+
+    }
+
+    @FXML
+    private void pesquisarPlaca(ActionEvent event) {
+        pesquisarPlaca();
+    }
+
     @FXML
     private void actionRegistrar(ActionEvent event) {
 
@@ -119,12 +200,15 @@ public class Entrada2ViewController implements Initializable {
 
     @FXML
     private void actionEditar(ActionEvent event) {
-
+        selectOneMarca.setDisable(false);
+        selectOneModelo.setDisable(false);
+        selectOneCor.setDisable(false);
+        selectOneTipoVeiculo.setDisable(false);
     }
 
     @FXML
     private void actionLimpar(ActionEvent event) {
-
+        mainController.chamaEntrada2View();
     }
 
 }

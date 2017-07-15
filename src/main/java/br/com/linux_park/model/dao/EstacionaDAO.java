@@ -28,6 +28,7 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
 //        e.setRegiao(o.getRegiao());
 //        e.setDtInclusao(o.getDtInclusao());
         
+        
 
         return e;
     }

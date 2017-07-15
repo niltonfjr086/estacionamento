@@ -15,12 +15,11 @@ public class VeiculoDAO extends GenericDAO<VeiculoDB, Veiculo> {
     public VeiculoDB toDB(Veiculo o) {
 
         VeiculoDB e = new VeiculoDB();
-//        e.setId(o.getId());
-//        e.setNome(o.getNome());
-//        e.setUf(o.getUf());
-//        e.setPais(o.getPais().getId());
-//        e.setRegiao(o.getRegiao());
-//        e.setDtInclusao(o.getDtInclusao());
+        e.setId(o.getId());
+        e.setPlaca(o.getPlaca());
+        e.setId_cor(o.getCor().getId());
+        e.setId_modelo(o.getModelo().getId());
+        e.setData_inclusao(o.getDataInclusao());
 
         return e;
     }
@@ -29,12 +28,12 @@ public class VeiculoDAO extends GenericDAO<VeiculoDB, Veiculo> {
     public Veiculo fromDB(VeiculoDB o) {
 
         Veiculo e = new Veiculo();
-//        e.setId(o.getId());
-//        e.setNome(o.getNome());
-//        e.setUf(o.getUf());
-//        e.setPais(new PaisDAO().getPorId(o.getPais()));
-//        e.setRegiao(o.getRegiao());
-//        e.setDtInclusao(o.getDtInclusao());
+        e.setId(o.getId());
+        e.setPlaca(o.getPlaca());
+        e.setCor(new CorDAO().getPorId(o.getId_cor()));
+        e.setModelo(new ModeloDAO().getPorId(o.getId_modelo()));
+        e.setMarca(e.getModelo().getMarca());
+        e.setDataInclusao(o.getData_inclusao());
 
         return e;
     }

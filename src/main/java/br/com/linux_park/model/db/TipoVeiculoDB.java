@@ -1,25 +1,18 @@
-package br.com.linux_park.model.bean;
+package br.com.linux_park.model.db;
 
 import java.util.Date;
 import java.util.Objects;
 
 /**
  *
- * @author N
+ * @author main
  */
-public class Cor {
+public class TipoVeiculoDB {
 
     private Long id;
     private String descricao;
+    private Long id_tipo_vaga;
     private Date data_inclusao;
-
-    public Cor() {
-
-    }
-
-    public Cor(String descricao) {
-        this.descricao = descricao;
-    }
 
     public Long getId() {
         return id;
@@ -37,6 +30,14 @@ public class Cor {
         this.descricao = descricao;
     }
 
+    public Long getId_tipo_vaga() {
+        return id_tipo_vaga;
+    }
+
+    public void setId_tipo_vaga(Long id_tipo_vaga) {
+        this.id_tipo_vaga = id_tipo_vaga;
+    }
+
     public Date getData_inclusao() {
         return data_inclusao;
     }
@@ -47,10 +48,11 @@ public class Cor {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.descricao);
-        hash = 53 * hash + Objects.hashCode(this.data_inclusao);
+        int hash = 5;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.descricao);
+        hash = 83 * hash + Objects.hashCode(this.id_tipo_vaga);
+        hash = 83 * hash + Objects.hashCode(this.data_inclusao);
         return hash;
     }
 
@@ -65,7 +67,7 @@ public class Cor {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Cor other = (Cor) obj;
+        final TipoVeiculoDB other = (TipoVeiculoDB) obj;
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
@@ -74,8 +76,7 @@ public class Cor {
 
     @Override
     public String toString() {
-//        return "Cor{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
-        return descricao;
+        return "TipoVeiculoDB{" + "id=" + id + ", descricao=" + descricao + ", id_tipo_vaga=" + id_tipo_vaga + ", data_inclusao=" + data_inclusao + '}';
     }
 
 }

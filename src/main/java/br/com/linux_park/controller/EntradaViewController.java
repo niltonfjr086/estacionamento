@@ -2,8 +2,10 @@ package br.com.linux_park.controller;
 
 import br.com.linux_park.model.bean.Cor;
 import br.com.linux_park.model.bean.TipoVaga;
+import br.com.linux_park.model.bean.TipoVeiculo;
 import br.com.linux_park.model.dao.CorDAO;
 import br.com.linux_park.model.dao.TipoVagaDAO;
+import br.com.linux_park.model.dao.TipoVeiculoDAO;
 import br.com.linux_park.model.vo.EntradaVO;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,6 +55,7 @@ public class EntradaViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         habilitarPlacaMask(this.inpPlaca);
+        ev.verificaDadosIniciais();
 
     }
 
@@ -98,62 +101,6 @@ public class EntradaViewController implements Initializable {
     private void setDadosEntradaView(ActionEvent event) {
         System.out.println("TESTE 1");
 
-        CorDAO cd = new CorDAO();
-        if (cd.listarTodos().size() <= 0) {
-            Cor[] cc = {
-                new Cor("BRANCO"), new Cor("PRETO"), new Cor("PRATA"), new Cor("VERMELHO"),
-                new Cor("AMARELO"), new Cor("AZUL"), new Cor("VERDE"), new Cor("MARROM")
-            };
-
-            for (Cor c : cc) {
-                cd.inserir(c);
-            }
-
-        }
-//        Cor cor = new Cor("MARROM");
-//        System.out.println(cd.inserir(cor));
-//        Cor c = cd.get("marrom");
-//        c.setDescricao("Marrom");
-//        cd.alterar(c);
-//        System.out.println(cd.listarTodos());
-
-        TipoVagaDAO tvd = new TipoVagaDAO();
-        if (tvd.listarTodos().size() <= 0) {
-            TipoVaga[] tv = {
-                new TipoVaga("2 eixos simples", 3.5f, 50), new TipoVaga("2 eixos", 5.5f, 20), new TipoVaga("3 eixos", 15.5f, 5)
-            };
-
-            for (TipoVaga t : tv) {
-                tvd.inserir(t);
-            }
-        }
-
-//        TipoVaga tv = new TipoVaga();
-//        tv.setDescricao("AZUL");
-//
-//        System.out.println("1 " + cd.listarTodos());
-//
-//        System.out.println(tvd.inserir(cor));
-//
-//        System.out.println("2 " + cd.listarTodos());
-//        if (ev.vDAO.existente(inpPlaca.getText())) {
-//            ev.setVeiculo(inpPlaca.getText());
-//            lblPlaca.setText(vv.getPlaca());
-//            lblMarcaModelo.setText(vv.getMarca().getNome() + " " + vv.getModelo().getNome());
-//            lblFabricacaoAnoModelo.setText("" + vv.getFabricacao() + "/" + vv.getModelo().getAno());
-//            lblCondutor.setText(vv.getCondutor().getNome());
-//            lblCor.setText(vv.getCor().getNome());
-//            lblCidadeUF.setText(vv.getCidade().getNome() + "/" + vv.getEstado().getUf());
-//            System.out.println(vv.getCondutor().getNome());
-//        } else {
-//            lblPlaca.setText("Não encontrado");
-//            lblMarcaModelo.setText("Não encontrado");
-//            lblFabricacaoAnoModelo.setText("Não encontrado");
-//            lblCondutor.setText("Não encontrado");
-//            lblCor.setText("Não encontrado");
-//            lblCidadeUF.setText("Não encontrado");
-//            System.out.println("Não encontrado");
-//        }
     }
 
     @FXML

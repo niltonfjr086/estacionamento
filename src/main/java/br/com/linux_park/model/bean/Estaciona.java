@@ -5,7 +5,6 @@
  */
 package br.com.linux_park.model.bean;
 
-import br.com.linux_park.model.bean.Cor;
 import java.util.Date;
 import java.util.Objects;
 

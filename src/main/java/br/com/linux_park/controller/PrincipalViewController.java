@@ -150,7 +150,7 @@ public class PrincipalViewController implements Initializable {
         }
     }
 
-    private void chamaEntrada2View() {
+    public void chamaEntrada2View() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/fxml/Entrada2View.fxml"));

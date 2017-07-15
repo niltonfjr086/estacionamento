@@ -5,20 +5,21 @@ import java.util.Objects;
 
 /**
  *
- * @author N
+ * @author main
  */
-public class Cor {
+public class TipoVeiculo {
 
     private Long id;
     private String descricao;
+    private TipoVaga tipoVaga;
     private Date data_inclusao;
 
-    public Cor() {
-
+    public TipoVeiculo() {
     }
 
-    public Cor(String descricao) {
+    public TipoVeiculo(String descricao, TipoVaga tipoVaga) {
         this.descricao = descricao;
+        this.tipoVaga = tipoVaga;
     }
 
     public Long getId() {
@@ -37,6 +38,14 @@ public class Cor {
         this.descricao = descricao;
     }
 
+    public TipoVaga getTipoVaga() {
+        return tipoVaga;
+    }
+
+    public void setTipoVaga(TipoVaga vaga) {
+        this.tipoVaga = vaga;
+    }
+
     public Date getData_inclusao() {
         return data_inclusao;
     }
@@ -47,10 +56,11 @@ public class Cor {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.descricao);
-        hash = 53 * hash + Objects.hashCode(this.data_inclusao);
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.descricao);
+        hash = 29 * hash + Objects.hashCode(this.tipoVaga);
+        hash = 29 * hash + Objects.hashCode(this.data_inclusao);
         return hash;
     }
 
@@ -65,7 +75,7 @@ public class Cor {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Cor other = (Cor) obj;
+        final TipoVeiculo other = (TipoVeiculo) obj;
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
@@ -74,7 +84,7 @@ public class Cor {
 
     @Override
     public String toString() {
-//        return "Cor{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
+//        return "TipoVeiculo{" + "id=" + id + ", descricao=" + descricao + ", tipoVaga=" + tipoVaga + ", data_inclusao=" + data_inclusao + '}';
         return descricao;
     }
 

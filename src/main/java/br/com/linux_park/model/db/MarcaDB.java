@@ -1,25 +1,17 @@
-package br.com.linux_park.model.bean;
+package br.com.linux_park.model.db;
 
 import java.util.Date;
 import java.util.Objects;
 
 /**
  *
- * @author N
+ * @author main
  */
-public class Cor {
+public class MarcaDB {
 
     private Long id;
     private String descricao;
     private Date data_inclusao;
-
-    public Cor() {
-
-    }
-
-    public Cor(String descricao) {
-        this.descricao = descricao;
-    }
 
     public Long getId() {
         return id;
@@ -47,10 +39,10 @@ public class Cor {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.descricao);
-        hash = 53 * hash + Objects.hashCode(this.data_inclusao);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.descricao);
+        hash = 29 * hash + Objects.hashCode(this.data_inclusao);
         return hash;
     }
 
@@ -65,7 +57,7 @@ public class Cor {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Cor other = (Cor) obj;
+        final MarcaDB other = (MarcaDB) obj;
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
@@ -74,8 +66,7 @@ public class Cor {
 
     @Override
     public String toString() {
-//        return "Cor{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
-        return descricao;
+        return "MarcaDB{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
     }
 
 }

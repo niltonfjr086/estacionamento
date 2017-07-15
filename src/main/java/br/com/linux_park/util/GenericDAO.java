@@ -255,6 +255,18 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         return sql;
     }
 
+    public String sqlSelect() {
+        return "SELECT * FROM " + this.banco + "." + this.tabela
+                + " WHERE " + this.banco + "." + this.tabela + "." + "data_remocao IS NULL";
+    }
+
+    public String sqlSelect(Long fk) {
+        return "SELECT * FROM " + this.banco + "." + this.tabela
+                + " WHERE " + this.banco + "." + this.tabela + "." + "data_remocao IS NULL "
+                + " AND "
+                + this.banco + "." + this.tabela + "." + this.keyF + " = ?";
+    }
+
     public Field[] getDeclaredFields(Object objeto) {
 
         return objeto.getClass().getDeclaredFields();
@@ -404,8 +416,51 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         return null;
     }
 
+    public List<Z> listarTodos(Long fk) {
+
+        O ob = o;
+
+        Class c = ob.getClass();
+        Field[] atributos = c.getDeclaredFields();
+
+        String sql;
+        if (this.keyF == null) {
+            sql = sqlSelect();
+        } else {
+            sql = "SELECT * FROM " + this.banco + "." + this.tabela
+                    + " WHERE " + this.banco + "." + this.tabela + "." + "data_remocao IS NULL "
+                    + " AND "
+                    + this.banco + "." + this.tabela + "." + this.keyF + " = " + fk;
+        }
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            if (stmt.execute()) {
+
+                ResultSet rs = stmt.getResultSet();
+                List<Z> lista = new LinkedList<>();
+
+                while (rs.next()) {
+                    ob = (O) ob.getClass().getConstructor().newInstance();
+                    for (int i = 0; i < atributos.length; i++) {
+                        atributos[i].setAccessible(true);
+                        atributos[i].set(ob, rs.getObject(i + 1));
+                    }
+                    Z zz = fromDB(ob);
+                    lista.add(zz);
+                }
+                return lista;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+        return null;
+    }
+
     @Override
-    public List<Z> listarAoNomeParcial(String key) {
+    public List<Z> listarAoNomeParcial(String... key) {
         Class c = o.getClass();
         Field[] atributos = c.getDeclaredFields();
 
@@ -415,7 +470,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setObject(1, "%" + key.toLowerCase() + "%");
+            stmt.setObject(1, "%" + key[0].toLowerCase() + "%");
 
             if (stmt.execute()) {
 
@@ -442,7 +497,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
     }
 
     @Override
-    public Z get(String key) {
+    public Z get(String... key) {
         Class c = o.getClass();
         Field[] atributos = c.getDeclaredFields();
 
@@ -452,7 +507,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setObject(1, key.toLowerCase());
+            stmt.setObject(1, key[0].toLowerCase());
 
             if (stmt.execute()) {
 
@@ -477,7 +532,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
     }
 
     @Override
-    public Long getId(String key) {
+    public Long getId(String... key) {
 
         String sql = "SELECT " + this.banco + "." + this.tabela + "." + "id"
                 + " FROM " + this.banco + "." + this.tabela
@@ -486,7 +541,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setObject(1, key.toLowerCase());
+            stmt.setObject(1, key[0].toLowerCase());
 
             if (stmt.execute()) {
 
@@ -539,7 +594,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
     }
 
     @Override
-    public Boolean existente(String key) {
+    public Boolean existente(String... key) {
         String sql = "SELECT "
                 + "IF(("
                 + "SELECT " + "MIN(" + this.banco + "." + this.tabela + ".id " + ") "
@@ -550,7 +605,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setObject(1, key.toLowerCase());
+            stmt.setObject(1, key[0].toLowerCase());
 
             if (stmt.execute()) {
 

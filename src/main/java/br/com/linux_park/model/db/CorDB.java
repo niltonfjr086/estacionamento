@@ -12,10 +12,6 @@ public class CorDB {
     private String descricao;
     private Date data_inclusao;
 
-    public CorDB() {
-
-    }
-
     public Long getId() {
         return id;
     }

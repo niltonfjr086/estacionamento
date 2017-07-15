@@ -5,19 +5,18 @@ import java.util.Objects;
 
 /**
  *
- * @author N
+ * @author main
  */
-public class Cor {
+public class Marca {
 
     private Long id;
     private String descricao;
     private Date data_inclusao;
 
-    public Cor() {
-
+    public Marca() {
     }
 
-    public Cor(String descricao) {
+    public Marca(String descricao) {
         this.descricao = descricao;
     }
 
@@ -47,10 +46,10 @@ public class Cor {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.descricao);
-        hash = 53 * hash + Objects.hashCode(this.data_inclusao);
+        int hash = 7;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.descricao);
+        hash = 29 * hash + Objects.hashCode(this.data_inclusao);
         return hash;
     }
 
@@ -65,7 +64,7 @@ public class Cor {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Cor other = (Cor) obj;
+        final Marca other = (Marca) obj;
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
@@ -74,7 +73,7 @@ public class Cor {
 
     @Override
     public String toString() {
-//        return "Cor{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
+//        return "Marca{" + "id=" + id + ", descricao=" + descricao + ", data_inclusao=" + data_inclusao + '}';
         return descricao;
     }
 

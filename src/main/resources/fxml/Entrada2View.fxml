@@ -12,12 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="700.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="br.com.linux_park.controller.Entrada2ViewController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.linux_park.controller.Entrada2ViewController">
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -36,8 +35,8 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtPlaca" />
-                  <Button fx:id="pesquisaPlaca" mnemonicParsing="false" text="Q" />
+                  <TextField fx:id="txtPlaca" prefWidth="220.0" />
+                  <Button fx:id="pesquisaPlaca" mnemonicParsing="false" onAction="#pesquisarPlaca" text="Q" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="2.0" GridPane.rowIndex="1">
@@ -47,7 +46,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="selectOneMarca" prefWidth="150.0" />
+                  <ComboBox fx:id="selectOneMarca" prefWidth="220.0" />
                   <Button mnemonicParsing="false" text="+" />
                </children>
             </HBox>
@@ -58,7 +57,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="selectOneModelo" prefWidth="150.0" />
+                  <ComboBox fx:id="selectOneModelo" prefHeight="31.0" prefWidth="220.0" />
                   <Button mnemonicParsing="false" text="+" />
                </children>
             </HBox>
@@ -69,7 +68,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="selectOneCor" prefWidth="150.0" />
+                  <ComboBox fx:id="selectOneCor" prefWidth="220.0" />
                   <Button mnemonicParsing="false" text="+" />
                </children>
             </HBox>
@@ -80,7 +79,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="selectOneTipo" prefWidth="150.0" />
+                  <ComboBox fx:id="selectOneTipoVeiculo" prefWidth="220.0" />
                   <Button mnemonicParsing="false" text="+" />
                </children>
             </HBox>

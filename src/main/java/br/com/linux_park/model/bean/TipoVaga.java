@@ -94,7 +94,8 @@ public class TipoVaga {
 
     @Override
     public String toString() {
-        return "TipoVaga{" + "id=" + id + ", descricao=" + descricao + ", quantidade=" + quantidade + ", data_inclusao=" + data_inclusao + '}';
+//        return "TipoVaga{" + "id=" + id + ", descricao=" + descricao + ", quantidade=" + quantidade + ", data_inclusao=" + data_inclusao + '}';
+        return descricao;
     }
 
 }
