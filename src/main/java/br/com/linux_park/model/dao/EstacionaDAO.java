@@ -12,7 +12,9 @@ import br.com.linux_park.util.GenericDAO;
 public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
 
     public EstacionaDAO() {
-        super(BaseDAO.BANCO[0], "tb_estaciona", "nome", new EstacionaDB(), new Estaciona());
+        super(BaseDAO.BANCO[0], "tb_estaciona", "id_veiculo", new EstacionaDB(), new Estaciona());
+        this.inicio = " data_entrada ";
+        this.fim = " data_saida ";
     }
 
     @Override
@@ -20,15 +22,11 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
 
         EstacionaDB e = new EstacionaDB();
         e.setId(o.getId());
-        
-//        e.setId(o.getId());
-//        e.setNome(o.getNome());
-//        e.setUf(o.getUf());
-//        e.setPais(o.getPais().getId());
-//        e.setRegiao(o.getRegiao());
-//        e.setDtInclusao(o.getDtInclusao());
-        
-        
+        e.setId_veiculo(o.getVeiculo().getId());
+        e.setValor_un(o.getValorHora());
+        e.setPreco_total(o.getValorTotal());
+        e.setData_entrada(o.getDataEntrada());
+        e.setData_saida(o.getDataSaida());
 
         return e;
     }
@@ -37,16 +35,14 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
     public Estaciona fromDB(EstacionaDB o) {
 
         Estaciona e = new Estaciona();
-//        e.setId(o.getId());
-//        e.setNome(o.getNome());
-//        e.setUf(o.getUf());
-//        e.setPais(new PaisDAO().getPorId(o.getPais()));
-//        e.setRegiao(o.getRegiao());
-//        e.setDtInclusao(o.getDtInclusao());
+        e.setId(o.getId());
+        e.setVeiculo(new VeiculoDAO().getPorId(o.getId_veiculo()));
+        e.setValorHora(o.getValor_un());
+        e.setValorTotal(o.getPreco_total());
+        e.setDataEntrada(o.getData_entrada());
+        e.setDataSaida(o.getData_saida());
 
         return e;
     }
-    
-   
 
 }

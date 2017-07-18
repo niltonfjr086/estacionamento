@@ -11,8 +11,8 @@ public class Veiculo {
 
     private Long id;
     private String placa;
-    private Cor cor;
     private Modelo modelo;
+    private Cor cor;
     private Marca marca;
     private Date dataInclusao;
 

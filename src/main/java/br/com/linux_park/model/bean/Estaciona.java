@@ -13,14 +13,29 @@ import java.util.Objects;
  * @author Aluno
  */
 public class Estaciona {
+//    private Long id;
+//    private Long id_veiculo;
+//    private Float valor_un;
+//    private Float preco_total;
+//    private Date data_entrada;
+//    private Date data_saida;
 
     private Long id;
     private Veiculo veiculo;
-    private Cor cor;
-    private TipoVaga tipo_vaga;
-    private Date data_entrada;
-    private Date data_saida;
-    private Float preco_total;
+
+    private Float valorHora;
+
+    private Float valorTotal;
+    private Date dataEntrada;
+    private Date dataSaida;
+
+    public Estaciona() {
+    }
+
+    public Estaciona(Veiculo veiculo) {
+        this.veiculo = veiculo;
+        this.valorHora = veiculo.getModelo().getTipoVeiculo().getTipoVaga().getPreco_unitario();
+    }
 
     public Long getId() {
         return id;
@@ -36,58 +51,50 @@ public class Estaciona {
 
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
+//        setValorHora(veiculo.getModelo().getTipoVeiculo().getTipoVaga().getPreco_unitario());
     }
 
-    public Cor getCor() {
-        return cor;
+    public Date getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setCor(Cor cor) {
-        this.cor = cor;
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
-    public TipoVaga getTipo_vaga() {
-        return tipo_vaga;
+    public Float getValorHora() {
+        return valorHora;
     }
 
-    public void setTipo_vaga(TipoVaga tipo_vaga) {
-        this.tipo_vaga = tipo_vaga;
+    public void setValorHora(Float valorHora) {
+        this.valorHora = valorHora;
     }
 
-    public Date getData_entrada() {
-        return data_entrada;
+    public Date getDataSaida() {
+        return dataSaida;
     }
 
-    public void setData_entrada(Date data_entrada) {
-        this.data_entrada = data_entrada;
+    public void setDataSaida(Date dataSaida) {
+        this.dataSaida = dataSaida;
     }
 
-    public Date getData_saida() {
-        return data_saida;
+    public Float getValorTotal() {
+        return valorTotal;
     }
 
-    public void setData_saida(Date data_saida) {
-        this.data_saida = data_saida;
-    }
-
-    public Float getPreco_total() {
-        return preco_total;
-    }
-
-    public void setPreco_total(Float preco_total) {
-        this.preco_total = preco_total;
+    public void setValorTotal(Float valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + Objects.hashCode(this.id);
-        hash = 47 * hash + Objects.hashCode(this.veiculo);
-        hash = 47 * hash + Objects.hashCode(this.cor);
-        hash = 47 * hash + Objects.hashCode(this.tipo_vaga);
-        hash = 47 * hash + Objects.hashCode(this.data_entrada);
-        hash = 47 * hash + Objects.hashCode(this.data_saida);
-        hash = 47 * hash + Objects.hashCode(this.preco_total);
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.veiculo);
+        hash = 89 * hash + Objects.hashCode(this.dataEntrada);
+        hash = 89 * hash + Objects.hashCode(this.valorHora);
+        hash = 89 * hash + Objects.hashCode(this.dataSaida);
+        hash = 89 * hash + Objects.hashCode(this.valorTotal);
         return hash;
     }
 
@@ -106,19 +113,7 @@ public class Estaciona {
         if (!Objects.equals(this.veiculo, other.veiculo)) {
             return false;
         }
-        if (!Objects.equals(this.cor, other.cor)) {
-            return false;
-        }
-        if (!Objects.equals(this.tipo_vaga, other.tipo_vaga)) {
-            return false;
-        }
-        if (!Objects.equals(this.data_entrada, other.data_entrada)) {
-            return false;
-        }
-        if (!Objects.equals(this.data_saida, other.data_saida)) {
-            return false;
-        }
-        if (!Objects.equals(this.preco_total, other.preco_total)) {
+        if (!Objects.equals(this.dataEntrada, other.dataEntrada)) {
             return false;
         }
         return true;
@@ -126,11 +121,7 @@ public class Estaciona {
 
     @Override
     public String toString() {
-        return "Estaciona{" + "id=" + id + ", veiculo=" + veiculo + ", cor=" + cor + ", tipo_vaga=" + tipo_vaga + ", data_entrada=" + data_entrada + ", data_saida=" + data_saida + ", preco_total=" + preco_total + '}';
+        return "Estaciona{" + "id=" + id + ", veiculo=" + veiculo + ", dataEntrada=" + dataEntrada + ", valorHora=" + valorHora + ", dataSaida=" + dataSaida + ", valorTotal=" + valorTotal + '}';
     }
-    
-    
-
-
 
 }

@@ -13,11 +13,11 @@
                         <BorderPane id="brdEntrada2" fx:id="brdEntrada2" prefHeight="200.0" prefWidth="200.0" />
                     </content>
                 </Tab>
-                <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntradaView" text="Entrada">
+<!--                <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntradaView" text="Entrada">
                     <content>
                         <BorderPane id="brdEntrada" fx:id="brdEntrada" prefHeight="200.0" prefWidth="200.0" />
                     </content>
-                </Tab>
+                </Tab>-->
                 <Tab id="tabSaida" fx:id="tabSaida" onSelectionChanged="#chamaSaidaView" text="Saída">
                     <content>
                         <BorderPane id="brdSaida" fx:id="brdSaida" prefHeight="200.0" prefWidth="200.0" />

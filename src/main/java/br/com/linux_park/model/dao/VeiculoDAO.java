@@ -1,5 +1,8 @@
 package br.com.linux_park.model.dao;
 
+import br.com.linux_park.model.bean.Cor;
+import br.com.linux_park.model.bean.Marca;
+import br.com.linux_park.model.bean.Modelo;
 import br.com.linux_park.model.bean.Veiculo;
 import br.com.linux_park.model.db.VeiculoDB;
 import br.com.linux_park.util.BaseDAO;
@@ -27,15 +30,19 @@ public class VeiculoDAO extends GenericDAO<VeiculoDB, Veiculo> {
     @Override
     public Veiculo fromDB(VeiculoDB o) {
 
-        Veiculo e = new Veiculo();
-        e.setId(o.getId());
-        e.setPlaca(o.getPlaca());
-        e.setCor(new CorDAO().getPorId(o.getId_cor()));
-        e.setModelo(new ModeloDAO().getPorId(o.getId_modelo()));
-        e.setMarca(e.getModelo().getMarca());
-        e.setDataInclusao(o.getData_inclusao());
+        Cor cor = new CorDAO().getPorId(o.getId_cor());
+        Modelo modelo = new ModeloDAO().getPorId(o.getId_modelo());
+        Marca marca = modelo.getMarca();
+        Veiculo veiculo = new Veiculo();
 
-        return e;
+        veiculo.setId(o.getId());
+        veiculo.setPlaca(o.getPlaca());
+        veiculo.setCor(cor);
+        veiculo.setModelo(modelo);
+        veiculo.setMarca(marca);
+
+        veiculo.setDataInclusao(o.getData_inclusao());
+        return veiculo;
     }
 
 }

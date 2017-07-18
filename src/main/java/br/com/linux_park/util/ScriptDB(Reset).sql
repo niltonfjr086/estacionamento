@@ -71,9 +71,10 @@ data_remocao datetime null,
 create table if not exists linuxpark.tb_estaciona (
 id bigint primary key auto_increment,
 id_veiculo bigint not null,
+valor_un float not null,
+preco_total float null,
 data_entrada datetime not null,
 data_saida datetime null,
-preco_total float null,
 
     foreign key (id_veiculo) references linuxpark.tb_veiculo(id)
 );
@@ -85,3 +86,8 @@ preco_total float null,
 -- SELECT * FROM linuxpark.tb_modelo;
 -- SELECT * FROM linuxpark.tb_veiculo;
 -- SELECT * FROM linuxpark.tb_estaciona;
+
+
+--  SELECT * FROM linuxpark.tb_veiculo
+--                 WHERE linuxpark.tb_veiculo.data_remocao IS NULL
+--                  AND LOWER(linuxpark.tb_veiculo.placa) = 'psl-4977';

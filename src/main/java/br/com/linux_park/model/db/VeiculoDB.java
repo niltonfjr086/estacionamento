@@ -7,8 +7,8 @@ public class VeiculoDB {
 
     private Long id;
     private String placa;
-    private Long id_cor;
     private Long id_modelo;
+    private Long id_cor;
     private Date data_inclusao;
 
     public Long getId() {

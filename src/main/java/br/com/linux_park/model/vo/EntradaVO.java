@@ -31,7 +31,7 @@ public class EntradaVO {
     public final TipoVagaDAO tipoVagaDAO = new TipoVagaDAO();
 
     private Estaciona estacionar;
-    private Veiculo veiculo = new Veiculo();
+    private Veiculo veiculo; //= new Veiculo();
 
     public Estaciona getEstacionar() {
         return estacionar;
@@ -109,13 +109,24 @@ public class EntradaVO {
 
         if (veiculoDAO.listarTodos().size() <= 0) {
             Veiculo[] v = {
-                new Veiculo("DFD-4040", corDAO.get("vermelha"), modeloDAO.get("XR 250 TORNADO - 2003/2003")),
-                new Veiculo("PSL-4977", corDAO.get("vermelha"), modeloDAO.get("KA SEL 1.0 HA - 2015/2016"))
+                new Veiculo("PSL-4977", corDAO.get("azul"), modeloDAO.get("KA SEL 1.0 HA - 2015/2016")),
+                new Veiculo("DFD-4040", corDAO.get("vermelha"), modeloDAO.get("XR 250 TORNADO - 2003/2003"))
             };
             for (Veiculo t : v) {
                 veiculoDAO.inserir(t);
             }
         }
+
+        if (estacionaDAO.listarTodos().size() <= 0) {
+            Estaciona[] v = {
+                new Estaciona(veiculoDAO.get("PSL-4977")),
+                 new Estaciona(veiculoDAO.get("DFD-4040"))
+            };
+            for (Estaciona t : v) {
+                estacionaDAO.inserir(t);
+            }
+        }
+
     }
 
 }
