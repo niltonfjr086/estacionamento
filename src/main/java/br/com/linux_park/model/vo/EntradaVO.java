@@ -116,16 +116,35 @@ public class EntradaVO {
                 veiculoDAO.inserir(t);
             }
         }
-
+        
+        System.out.println(estacionaDAO.getToleranciaDefault());
+//        if(Integer.parseInt("1") >= 0){
+//            
+//        }
+//        Boolean b = false;
+        System.out.println();
         if (estacionaDAO.listarTodos().size() <= 0) {
             Estaciona[] v = {
-                new Estaciona(veiculoDAO.get("PSL-4977")),
-                 new Estaciona(veiculoDAO.get("DFD-4040"))
+                new Estaciona(veiculoDAO.get("PSL-4977"), estacionaDAO.getToleranciaDefault())
+                , new Estaciona(veiculoDAO.get("DFD-4040"), estacionaDAO.getToleranciaDefault())
             };
             for (Estaciona t : v) {
                 estacionaDAO.inserir(t);
             }
         }
+        
+//        estacionaDAO.alterarDefaultTolerancia(80);
+
+        System.out.println("");
+        
+//        System.out.println(estacionaDAO.listarTodos());
+//        estacionaDAO.excluir(2L);
+//        System.out.println(estacionaDAO.listarTodos(false));
+        
+//        System.out.println(estacionaDAO.listarTodos(true));
+        
+        
+        
 
     }
 

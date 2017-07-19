@@ -101,13 +101,36 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
                         <Label fx:id="lblQtdMoto" text="Moto" />
-                        <Label fx:id="lblVagasMoto" text="40" />
+                        <Label fx:id="lblVagasMoto" text="0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
                         <Label fx:id="lblQtdCarro" text="Carro" />
-                        <Label fx:id="lblVagasCarro" text="30" />
+                        <Label fx:id="lblVagasCarro" text="0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Label fx:id="lblQtdCaminhonete" alignment="CENTER" contentDisplay="CENTER" text="Caminhonete" />
+                        <Label fx:id="lblVagasCaminhonete" text="0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                     <children>
+                        <Label fx:id="lblQtdCaminhao" text="Caminhão" />
+                        <Label fx:id="lblVagasCaminhao" text="0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="4.0">
+                     <children>
+                        <Label fx:id="lblValorTolerancia" text="Tolerância" />
+                        <Label fx:id="lblMinutosTolerancia" text="10" />
+                        <Label fx:id="lblUnidadeMedida" text="minutos" />
                      </children>
                   </HBox>
                </children>

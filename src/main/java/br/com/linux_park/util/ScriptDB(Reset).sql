@@ -1,9 +1,9 @@
 /**
- * Author:  main
+ * Author:  Leandro P., Nilton
  * Created: 15/07/2017
  */
 
-drop database linuxpark;
+drop database if exists linuxpark;
 
 create database linuxpark;
 
@@ -72,12 +72,15 @@ create table if not exists linuxpark.tb_estaciona (
 id bigint primary key auto_increment,
 id_veiculo bigint not null,
 valor_un float not null,
+tolerancia int DEFAULT 15,
 preco_total float null,
 data_entrada datetime not null,
 data_saida datetime null,
 
     foreign key (id_veiculo) references linuxpark.tb_veiculo(id)
 );
+
+-- INSERT INTO linuxpark.tb_estaciona(id_veiculo, valor_un) VALUES(1, 2.0);
 
 -- SELECT * FROM linuxpark.tb_tipovaga;
 -- SELECT * FROM linuxpark.tb_tipoveiculo;
@@ -91,3 +94,38 @@ data_saida datetime null,
 --  SELECT * FROM linuxpark.tb_veiculo
 --                 WHERE linuxpark.tb_veiculo.data_remocao IS NULL
 --                  AND LOWER(linuxpark.tb_veiculo.placa) = 'psl-4977';
+
+
+-- SELECT IF(
+-- (SELECT linuxpark.tb_estaciona.id FROM linuxpark.tb_estaciona 
+-- WHERE LOWER(linuxpark.tb_estaciona.id) = 1)
+--  IS NOT NULL, TRUE, FALSE);
+-- 
+-- 
+-- SELECT IF(
+-- (SELECT MIN(linuxpark.tb_veiculo.id)  FROM linuxpark.tb_veiculo 
+-- WHERE linuxpark.tb_veiculo.placa = 'PSL-4977')
+--              IS NOT NULL , TRUE , FALSE);
+-- 
+-- SELECT linuxpark.tb_estaciona.id , linuxpark.tb_veiculo.id
+-- FROM linuxpark.tb_estaciona 
+-- INNER JOIN linuxpark.tb_veiculo
+-- ON linuxpark.tb_estaciona.id_veiculo = linuxpark.tb_veiculo.id
+-- ORDER BY linuxpark.tb_estaciona.id
+-- 
+-- 
+-- SELECT MIN(linuxpark.tb_estaciona.id)
+-- FROM linuxpark.tb_estaciona 
+-- INNER JOIN linuxpark.tb_veiculo
+-- ON linuxpark.tb_estaciona.id_veiculo = linuxpark.tb_veiculo.id
+-- WHERE linuxpark.tb_veiculo.id = 2 
+-- AND linuxpark.tb_estaciona.data_saida IS NULL
+-- ORDER BY linuxpark.tb_estaciona.id
+
+
+-- SELECT DEFAULT(linuxpark.tb_estaciona.tolerancia) 
+-- FROM linuxpark.tb_estaciona 
+-- order by linuxpark.tb_estaciona.tolerancia desc LIMIT 1;
+-- 
+-- ALTER TABLE linuxpark.tb_estaciona
+-- MODIFY linuxpark.tb_estaciona.tolerancia int default 80;

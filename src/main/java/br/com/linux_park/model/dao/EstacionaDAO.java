@@ -4,6 +4,10 @@ import br.com.linux_park.model.bean.Estaciona;
 import br.com.linux_park.model.db.EstacionaDB;
 import br.com.linux_park.util.BaseDAO;
 import br.com.linux_park.util.GenericDAO;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,8 +17,8 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
 
     public EstacionaDAO() {
         super(BaseDAO.BANCO[0], "tb_estaciona", "id_veiculo", new EstacionaDB(), new Estaciona());
-        this.inicio = " data_entrada ";
-        this.fim = " data_saida ";
+        this.inicio = "data_entrada";
+        this.fim = "data_saida";
     }
 
     @Override
@@ -24,6 +28,7 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
         e.setId(o.getId());
         e.setId_veiculo(o.getVeiculo().getId());
         e.setValor_un(o.getValorHora());
+        e.setTolerancia(o.getTolerancia());
         e.setPreco_total(o.getValorTotal());
         e.setData_entrada(o.getDataEntrada());
         e.setData_saida(o.getDataSaida());
@@ -38,11 +43,59 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
         e.setId(o.getId());
         e.setVeiculo(new VeiculoDAO().getPorId(o.getId_veiculo()));
         e.setValorHora(o.getValor_un());
+        e.setTolerancia(o.getTolerancia());
         e.setValorTotal(o.getPreco_total());
         e.setDataEntrada(o.getData_entrada());
         e.setDataSaida(o.getData_saida());
 
         return e;
+    }
+
+    public Boolean alterarDefaultTolerancia(Integer tolerancia) {
+
+        String sql = " ALTER TABLE linuxpark.tb_estaciona "
+                + " MODIFY " + this.banco + "." + this.tabela + "." + "tolerancia" + " int default ? ";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setObject(1, tolerancia.toString());
+
+            if (stmt.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+
+        return false;
+    }
+
+    public Integer getToleranciaDefault() {
+
+        String sql = " SELECT DEFAULT(linuxpark.tb_estaciona.tolerancia) "
+                + " FROM linuxpark.tb_estaciona "
+                + " order by linuxpark.tb_estaciona.tolerancia desc LIMIT 1 ";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            if (stmt.execute()) {
+
+                ResultSet rs = stmt.getResultSet();
+
+                while (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+
+        return null;
     }
 
 }

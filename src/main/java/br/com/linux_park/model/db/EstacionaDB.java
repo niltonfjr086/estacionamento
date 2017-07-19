@@ -1,4 +1,3 @@
-
 package br.com.linux_park.model.db;
 
 import java.util.Date;
@@ -15,12 +14,22 @@ public class EstacionaDB {
 //preco_total float null,
 //data_entrada datetime not null,
 //data_saida datetime null,
+
     private Long id;
     private Long id_veiculo;
     private Float valor_un;
+    private Integer tolerancia;
     private Float preco_total;
     private Date data_entrada;
     private Date data_saida;
+    
+//        private Long id;
+//    private Veiculo veiculo;
+//    private Float valorHora;
+//    private Integer tolerancia;
+//    private Float valorTotal;
+//    private Date dataEntrada;
+//    private Date dataSaida;
 
     public Long getId() {
         return id;
@@ -54,6 +63,14 @@ public class EstacionaDB {
         this.preco_total = preco_total;
     }
 
+    public Integer getTolerancia() {
+        return tolerancia;
+    }
+
+    public void setTolerancia(Integer tolerancia) {
+        this.tolerancia = tolerancia;
+    }
+
     public Date getData_entrada() {
         return data_entrada;
     }
@@ -73,12 +90,13 @@ public class EstacionaDB {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.id_veiculo);
-        hash = 59 * hash + Objects.hashCode(this.valor_un);
-        hash = 59 * hash + Objects.hashCode(this.preco_total);
-        hash = 59 * hash + Objects.hashCode(this.data_entrada);
-        hash = 59 * hash + Objects.hashCode(this.data_saida);
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.id_veiculo);
+        hash = 43 * hash + Objects.hashCode(this.valor_un);
+        hash = 43 * hash + Objects.hashCode(this.preco_total);
+        hash = 43 * hash + Objects.hashCode(this.tolerancia);
+        hash = 43 * hash + Objects.hashCode(this.data_entrada);
+        hash = 43 * hash + Objects.hashCode(this.data_saida);
         return hash;
     }
 
@@ -97,6 +115,15 @@ public class EstacionaDB {
         if (!Objects.equals(this.id_veiculo, other.id_veiculo)) {
             return false;
         }
+        if (!Objects.equals(this.valor_un, other.valor_un)) {
+            return false;
+        }
+        if (!Objects.equals(this.preco_total, other.preco_total)) {
+            return false;
+        }
+        if (!Objects.equals(this.tolerancia, other.tolerancia)) {
+            return false;
+        }
         if (!Objects.equals(this.data_entrada, other.data_entrada)) {
             return false;
         }
@@ -105,7 +132,7 @@ public class EstacionaDB {
 
     @Override
     public String toString() {
-        return "EstacionaDB{" + "id=" + id + ", id_veiculo=" + id_veiculo + ", valor_un=" + valor_un + ", preco_total=" + preco_total + ", data_entrada=" + data_entrada + ", data_saida=" + data_saida + '}';
+        return "EstacionaDB{" + "id=" + id + ", id_veiculo=" + id_veiculo + ", valor_un=" + valor_un + ", preco_total=" + preco_total + ", tolerancia=" + tolerancia + ", data_entrada=" + data_entrada + ", data_saida=" + data_saida + '}';
     }
 
 }

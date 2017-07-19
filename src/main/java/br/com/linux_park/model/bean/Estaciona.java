@@ -22,19 +22,21 @@ public class Estaciona {
 
     private Long id;
     private Veiculo veiculo;
-
     private Float valorHora;
-
+    private Integer tolerancia;
     private Float valorTotal;
     private Date dataEntrada;
     private Date dataSaida;
 
     public Estaciona() {
+
     }
 
-    public Estaciona(Veiculo veiculo) {
+    public Estaciona(Veiculo veiculo, Integer tolerancia) {
         this.veiculo = veiculo;
         this.valorHora = veiculo.getModelo().getTipoVeiculo().getTipoVaga().getPreco_unitario();
+        this.tolerancia = tolerancia;
+
     }
 
     public Long getId() {
@@ -51,7 +53,7 @@ public class Estaciona {
 
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
-//        setValorHora(veiculo.getModelo().getTipoVeiculo().getTipoVaga().getPreco_unitario());
+        this.valorHora = veiculo.getModelo().getTipoVeiculo().getTipoVaga().getPreco_unitario();
     }
 
     public Date getDataEntrada() {
@@ -68,6 +70,14 @@ public class Estaciona {
 
     public void setValorHora(Float valorHora) {
         this.valorHora = valorHora;
+    }
+
+    public Integer getTolerancia() {
+        return tolerancia;
+    }
+
+    public void setTolerancia(Integer tolerancia) {
+        this.tolerancia = tolerancia;
     }
 
     public Date getDataSaida() {
@@ -121,7 +131,8 @@ public class Estaciona {
 
     @Override
     public String toString() {
-        return "Estaciona{" + "id=" + id + ", veiculo=" + veiculo + ", dataEntrada=" + dataEntrada + ", valorHora=" + valorHora + ", dataSaida=" + dataSaida + ", valorTotal=" + valorTotal + '}';
+//        return "Estaciona{" + "id=" + id + ", veiculo=" + veiculo + ", valorHora=" + valorHora + ", tolerancia=" + tolerancia + ", valorTotal=" + valorTotal + ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + '}';
+        return veiculo.toString();
     }
 
 }

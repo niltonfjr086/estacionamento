@@ -242,8 +242,8 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         }
 
         String sql = "UPDATE " + this.banco + "." + tabela
-                + " SET "+ this.fim +" = NOW() "
-                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim +" IS NULL"
+                + " SET " + this.fim + " = NOW() "
+                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL"
                 + " AND " + this.banco + "." + this.tabela + "." + id + " = ?";
 
         return sql;
@@ -258,31 +258,37 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         return sql;
     }
 
-    public String sqlSelect() {
-        return "SELECT * FROM " + this.banco + "." + this.tabela
-                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL";
+    public String sqlSelectTodos() {
+        Field[] fs = o.getClass().getDeclaredFields();
+
+        if (!fs[fs.length - 1].getName().equals(this.inicio)) {
+            return "SELECT * FROM " + this.banco + "." + this.tabela + " ";
+
+        } else {
+            return "SELECT * FROM " + this.banco + "." + this.tabela
+                    + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL ";
+        }
     }
 
-    public String sqlSelect(Long fk) {
-        return "SELECT * FROM " + this.banco + "." + this.tabela
-                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL "
+    public String sqlSelectTodos(Long fk) {
+        return this.sqlSelectTodos()
                 + " AND "
-                + this.banco + "." + this.tabela + "." + this.keyF + " = ?";
+                + this.banco + "." + this.tabela + "." + this.keyF + " = " + fk + " ";
+
     }
 
     public Field[] getSelectedFields(Object objeto) {
         Field[] fs = objeto.getClass().getDeclaredFields();
-        
-        if(!fs[fs.length-1].getName().equals(this.inicio)){
-            Field[] someFields = new Field[fs.length-1];
-            
-            for(int i=0 ; i<someFields.length ; i++){
+
+        if (!fs[fs.length - 1].getName().equals(this.inicio)) {
+
+            Field[] someFields = new Field[fs.length - 1];
+            for (int i = 0; i < someFields.length; i++) {
                 someFields[i] = fs[i];
             }
-            
             return someFields;
         }
-        
+
         return fs;
     }
 
@@ -401,10 +407,9 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         Class c = ob.getClass();
         Field[] atributos = c.getDeclaredFields();
 
-        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
-                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL";
-
-        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+//        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
+//                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL";
+        try (PreparedStatement stmt = con.prepareStatement(GenericDAO.this.sqlSelectTodos())) {
 
             if (stmt.execute()) {
 
@@ -439,7 +444,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
         String sql;
         if (this.keyF == null) {
-            sql = sqlSelect();
+            sql = GenericDAO.this.sqlSelectTodos();
         } else {
             sql = "SELECT * FROM " + this.banco + "." + this.tabela
                     + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL "
@@ -482,7 +487,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
         String sql;
         if (this.keyF == null) {
-            sql = sqlSelect();
+            sql = GenericDAO.this.sqlSelectTodos();
         } else {
             sql = "SELECT * FROM " + this.banco + "." + this.tabela
                     + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL "
@@ -518,6 +523,110 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         return null;
     }
 
+    public List<Z> listarTodos(Boolean estado) {
+
+        O ob = o;
+        Class c = ob.getClass();
+        Field[] atributos = c.getDeclaredFields();
+
+        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
+                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " ";
+
+        if (estado) {
+            sql += " IS NULL";
+        } else {
+
+            sql += " IS NOT NULL";
+        }
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            if (stmt.execute()) {
+
+                ResultSet rs = stmt.getResultSet();
+                List<Z> lista = new LinkedList<>();
+
+                while (rs.next()) {
+                    ob = (O) ob.getClass().getConstructor().newInstance();
+                    for (int i = 0; i < atributos.length; i++) {
+                        atributos[i].setAccessible(true);
+                        atributos[i].set(ob, rs.getObject(i + 1));
+                    }
+                    Z zz = fromDB(ob);
+                    lista.add(zz);
+                }
+                return lista;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+        return null;
+    }
+
+//    public List<UtilizacaoDB> listarTodos(Date de, Date ate) {
+//
+//        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
+//                + " WHERE " + this.banco + "." + this.tabela + "." + "dtEntrada" + " BETWEEN ? AND ?";
+//
+//        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+//
+//            if (stmt.execute()) {
+//
+//                ResultSet rs = stmt.getResultSet();
+//                List<UtilizacaoDB> lista = new LinkedList<>();
+//
+//                while (rs.next()) {
+//                    lista.add(new UtilizacaoDB(rs.getLong(1), rs.getLong(2), rs.getTimestamp(3),
+//                            rs.getTimestamp(4), rs.getDouble(5)));
+//                }
+//                return lista;
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//
+//        }
+//        return null;
+//    }
+//
+//    public List<UtilizacaoDB> listarTodos(Date de, Date ate, Boolean estado) {
+//        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
+//                + " WHERE "
+//                + this.banco + "." + this.tabela + "." + "dtEntrada" + " BETWEEN ? AND ?"
+//                + " AND "
+//                + this.banco + "." + this.tabela + ".dtSaida";
+//
+//        if (estado) {
+//            sql += " IS NOT NULL";
+//        } else {
+//            sql += " IS NULL";
+//
+//        }
+//        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+//
+//            stmt.setObject(1, de.toString());
+//            stmt.setObject(2, ate.toString());
+//
+//            if (stmt.execute()) {
+//
+//                ResultSet rs = stmt.getResultSet();
+//                List<UtilizacaoDB> lista = new LinkedList<>();
+//
+//                while (rs.next()) {
+//                    lista.add(new UtilizacaoDB(rs.getLong(1), rs.getLong(2), rs.getTimestamp(3),
+//                            rs.getTimestamp(4), rs.getDouble(5)));
+//                }
+//                return lista;
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+//        } finally {
+//
+//        }
+//        return null;
+//    }
     @Override
     public List<Z> listarAoNomeParcial(String... key) {
         Class c = o.getClass();
@@ -563,7 +672,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
             ob = (O) ob.getClass().getConstructor().newInstance();
             Class c = ob.getClass();
             atributos = c.getDeclaredFields();
-            
+
         } catch (NoSuchMethodException ex) {
             Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SecurityException ex) {
@@ -578,8 +687,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
             Logger.getLogger(GenericDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
-                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL"
+        String sql = this.sqlSelectTodos()
                 + " AND LOWER(" + this.banco + "." + this.tabela + "." + this.key + ") = ? ";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -612,10 +720,16 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
     public Long getId(String... key) {
 
         String sql = "SELECT " + this.banco + "." + this.tabela + "." + "id"
-                + " FROM " + this.banco + "." + this.tabela
-                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL"
-                + " AND LOWER(" + this.banco + "." + this.tabela + "." + this.key + ") = ? ";
-        
+                + " FROM " + this.banco + "." + this.tabela + " WHERE ";
+
+        Field[] fs = o.getClass().getDeclaredFields();
+        if (!fs[fs.length - 1].getName().equals(this.inicio)) {
+
+            sql += this.banco + "." + this.tabela + "." + this.fim + " IS NULL" + " AND ";
+        }
+
+        sql += " LOWER(" + this.banco + "." + this.tabela + "." + this.key + ") = ? ";
+
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setObject(1, key[0].toLowerCase());
@@ -641,8 +755,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         Class c = o.getClass();
         Field[] atributos = c.getDeclaredFields();
 
-        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
-                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL"
+        String sql = this.sqlSelectTodos()
                 + " AND " + this.banco + "." + this.tabela + "." + "id" + " = ? ";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -672,12 +785,12 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
     @Override
     public Boolean existente(String... key) {
+
         String sql = "SELECT "
                 + "IF(("
-                + "SELECT " + "MIN(" + this.banco + "." + this.tabela + ".id " + ") "
-                + "FROM " + this.banco + "." + this.tabela + " "
-                + "WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL "
-                + "AND LOWER(" + this.banco + "." + this.tabela + "." + this.key + ") = ?) "
+                + "SELECT " + "MIN(" + this.banco + "." + this.tabela + ".id" + ") "
+                + "FROM " + this.banco + "." + this.tabela + " WHERE "
+                + " LOWER(" + this.banco + "." + this.tabela + "." + this.key + ") = ?) "
                 + "IS NOT NULL , TRUE , FALSE)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -690,6 +803,42 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
                 while (rs.next()) {
                     return rs.getInt(1) > 0;
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+        return false;
+    }
+
+    public Boolean utilizando(String... keys) {
+
+        String sql = "SELECT "
+                + "IF(("
+                + "SELECT " + "MIN(" + this.banco + "." + this.tabela + ".id " + ") "
+                + "FROM " + this.banco + "." + this.tabela + " "
+                + "WHERE " + this.banco + "." + this.tabela + "." + this.key + " = ? "
+                + " AND " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL " + " ) "
+                + "IS NOT NULL , TRUE , FALSE)";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+//                                for (int i = 0; i < atributos.length; i++) {
+//                        atributos[i].setAccessible(true);
+//                        atributos[i].set(o, rs.getObject(i + 1));
+//                    }
+//                    return fromDB(o);
+            for (int i = 0; i < keys.length; i++) {
+                stmt.setObject(i + 1, keys[i]);
+            }
+
+            if (stmt.execute()) {
+
+                ResultSet rs = stmt.getResultSet();
+
+                while (rs.next()) {
+                    return rs.getInt(1) == 1;
                 }
             }
         } catch (Exception ex) {
@@ -726,7 +875,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
     @Override
     public O toDB(Z objeto) {
-        
+
         Class c = objeto.getClass();
         Field[] ff = c.getDeclaredFields();
 
@@ -783,7 +932,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
     public Z fromDB(O objeto) {
         Class c = objeto.getClass();
         Field[] ff = c.getDeclaredFields();
-        
+
         z = fromDB();
         Class c2 = z.getClass();
         Field[] atributos = c2.getDeclaredFields();
@@ -808,44 +957,5 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         }
         return null;
     }
-    
-    
-    public Boolean utilizando(String... keys){
-        
-                String sql = "SELECT "
-                + "IF(("
-                + "SELECT " + "MIN(" + this.banco + "." + this.tabela + ".id " + ") "
-                + "FROM " + this.banco + "." + this.tabela + " "
-                + "WHERE " + this.banco + "." + this.tabela + "." + this.key + " = ? "
-                + " AND " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL " + " ) "
-                + "IS NOT NULL , TRUE , FALSE)";
 
-        try (PreparedStatement stmt = con.prepareStatement(sql)) {
-//                                for (int i = 0; i < atributos.length; i++) {
-//                        atributos[i].setAccessible(true);
-//                        atributos[i].set(o, rs.getObject(i + 1));
-//                    }
-//                    return fromDB(o);
-            for(int i=0 ; i<keys.length ; i++){
-                stmt.setObject(i + 1 , keys[i]);
-            }
-            
-            
-
-            if (stmt.execute()) {
-
-                ResultSet rs = stmt.getResultSet();
-
-                while (rs.next()) {
-                    return rs.getInt(1) == 1;
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        } finally {
-
-        }
-
-        return false;
-    }
 }

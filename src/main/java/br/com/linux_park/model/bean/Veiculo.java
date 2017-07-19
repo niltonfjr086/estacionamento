@@ -101,12 +101,25 @@ public class Veiculo {
         if (!Objects.equals(this.placa, other.placa)) {
             return false;
         }
+        if (!Objects.equals(this.modelo, other.modelo)) {
+            return false;
+        }
+        if (!Objects.equals(this.cor, other.cor)) {
+            return false;
+        }
+        if (!Objects.equals(this.marca, other.marca)) {
+            return false;
+        }
         return true;
     }
 
+
+
     @Override
     public String toString() {
-        return "Veiculo{" + "id=" + id + ", placa=" + placa + ", cor=" + cor + ", modelo=" + modelo + ", marca=" + marca + ", dataInclusao=" + dataInclusao + '}';
+//        return "Veiculo{" + "id=" + id + ", placa=" + placa + ", cor=" + cor + ", modelo=" + modelo + ", marca=" + marca + ", dataInclusao=" + dataInclusao + '}';
+        return placa + " " + modelo.getTipoVeiculo() + " " + marca + " " + modelo + " " + cor;
+    
     }
 
 
