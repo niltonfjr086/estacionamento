@@ -22,6 +22,7 @@ import javafx.scene.layout.BorderPane;
 public class PrincipalViewController implements Initializable {
 
     MainApp mainApp;
+    EntradaViewController evc;
 
     @FXML
     private Tab tabEntrada;
@@ -58,21 +59,21 @@ public class PrincipalViewController implements Initializable {
     }
 
     @FXML
-    private void chamaEntradaView(Event event) {
-        if (brdEntrada.getCenter() == null) {
-            chamaEntradaView();
+    private void chamaEntrada2View(Event event) {
+        if (brdEntrada2.getCenter() == null) {
+            chamaEntrada2View();
         }
-
     }
 
-    public void chamaEntradaView() {
+    public void chamaEntrada2View() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/fxml/EntradaView.fxml"));
+            loader.setLocation(MainApp.class.getResource("/fxml/Entrada2View.fxml"));
 
-            Parent entrada = loader.load();
-            brdEntrada.setCenter(entrada);
+            Parent config = loader.load();
+            brdEntrada2.setCenter(config);
             EntradaViewController controller = loader.getController();
+            this.evc = controller;
             controller.setMainController(this);
         } catch (IOException ex) {
             Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,9 +82,9 @@ public class PrincipalViewController implements Initializable {
 
     @FXML
     private void chamaSaidaView(Event event) {
-        if (brdSaida.getCenter() == null) {
-            chamaSaidaView();
-        }
+//        if (brdSaida.getCenter() == null) {
+        chamaSaidaView();
+//        }
     }
 
     public void chamaSaidaView() {
@@ -137,27 +138,6 @@ public class PrincipalViewController implements Initializable {
             Parent config = loader.load();
             brdConfig.setCenter(config);
             ConfigViewController controller = loader.getController();
-            controller.setMainController(this);
-        } catch (IOException ex) {
-            Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @FXML
-    private void chamaEntrada2View(Event event) {
-        if (brdEntrada2.getCenter() == null) {
-            chamaEntrada2View();
-        }
-    }
-
-    public void chamaEntrada2View() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/fxml/Entrada2View.fxml"));
-
-            Parent config = loader.load();
-            brdEntrada2.setCenter(config);
-            Entrada2ViewController controller = loader.getController();
             controller.setMainController(this);
         } catch (IOException ex) {
             Logger.getLogger(PrincipalViewController.class.getName()).log(Level.SEVERE, null, ex);

@@ -6,6 +6,7 @@ import br.com.linux_park.util.BaseDAO;
 import br.com.linux_park.util.GenericDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +29,9 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
         e.setId(o.getId());
         e.setId_veiculo(o.getVeiculo().getId());
         e.setValor_un(o.getValorHora());
-        e.setTolerancia(o.getTolerancia());
+        if (o.getTolerancia() != null) {
+            e.setTolerancia(o.getTolerancia());
+        }
         e.setPreco_total(o.getValorTotal());
         e.setData_entrada(o.getDataEntrada());
         e.setData_saida(o.getDataSaida());
@@ -85,7 +88,11 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
                 ResultSet rs = stmt.getResultSet();
 
                 while (rs.next()) {
-                    return rs.getInt(1);
+                    Integer i = rs.getInt(1);
+                    if (i >= 0) {
+                        return i;
+
+                    }
                 }
             }
 
@@ -95,7 +102,47 @@ public class EstacionaDAO extends GenericDAO<EstacionaDB, Estaciona> {
 
         }
 
-        return null;
+        return 15;
+    }
+
+    public Float calculaValorTotal(Estaciona e) {
+        Float valorPagar = 0.00f;
+        Long tempo;
+
+        if (e.getDataSaida() == null) {
+            tempo = new Date().getTime() - e.getDataEntrada().getTime();
+        } else {
+            tempo = e.getDataSaida().getTime() - e.getDataEntrada().getTime();
+        }
+
+        Long emMinutos = tempo / 1000 / 60;
+        Long emHoras = emMinutos / 60;
+
+        if (emMinutos >= e.getTolerancia()) {
+            ++emHoras;
+            valorPagar = Float.parseFloat(emHoras.toString()) * e.getValorHora();
+        }
+        return valorPagar;
+    }
+
+//    @Override
+    public Boolean arquivar(Long id) { //excluir
+        if (id == null) {
+            return false;
+        }
+
+        try (PreparedStatement stmt = con.prepareStatement(sqlDelete())) {
+            stmt.setObject(1, id);
+
+            if (stmt.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+        return false;
     }
 
 }

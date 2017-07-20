@@ -62,11 +62,20 @@ public class SaidaViewController implements Initializable {
     }
 
     private void preveisaoValorSaida(Estaciona newValue) {
-        lblPrevisaoPagar.setText(newValue.getValorHora().toString());
+        lblPrevisaoPagar.setText(
+//                newValue.getValorHora().toString()
+        sv.eDAO.calculaValorTotal(newValue).toString()
+        );
     }
 
     @FXML
     private void actionEncerrarUtil(ActionEvent event) {
+        
+//        Veiculo veiculo = sv.vDAO.getPorId(2L);
+//        System.out.println(sv.vDAO.getPorId(veiculo.getId()));
+//        Estaciona estaciona = sv.eDAO.getPorId(2L);
+//        System.out.println(sv.eDAO.getPorId(estaciona.getId()));
+
         Estaciona e = tblUtilizacao.getSelectionModel().getSelectedItem();
         if (e != null) {
             if (e.getVeiculo() != null) {
@@ -81,7 +90,7 @@ public class SaidaViewController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Veículo Estacionado");
         alert.setHeaderText("Confirmar saída?");
-        alert.setContentText(e.toString());
+        alert.setContentText(e.toString() + sv.eDAO.calculaValorTotal(e));
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -89,6 +98,10 @@ public class SaidaViewController implements Initializable {
             Boolean b = sv.eDAO.excluir(e.getId());
             if (b != null) {
 
+                Estaciona ee = sv.eDAO.getPorId(e.getId());
+                ee.setValorTotal(sv.eDAO.calculaValorTotal(ee));
+                sv.eDAO.alterar(ee);
+                mainController.evc.defineVagasDisponiveis();
                 mainController.chamaSaidaView();
                 mainController.chamaHistoricoView();
             }

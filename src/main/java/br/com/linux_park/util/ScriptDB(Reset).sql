@@ -72,7 +72,7 @@ create table if not exists linuxpark.tb_estaciona (
 id bigint primary key auto_increment,
 id_veiculo bigint not null,
 valor_un float not null,
-tolerancia int DEFAULT 15,
+tolerancia int DEFAULT 15 not null,
 preco_total float null,
 data_entrada datetime not null,
 data_saida datetime null,

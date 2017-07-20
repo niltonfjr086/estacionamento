@@ -8,16 +8,11 @@
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
-                <Tab id="tabEntrada2" fx:id="tabEntrada2" onSelectionChanged="#chamaEntrada2View" text="Entrada2">
+                <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntrada2View" text="Entrada">
                     <content>
                         <BorderPane id="brdEntrada2" fx:id="brdEntrada2" prefHeight="200.0" prefWidth="200.0" />
                     </content>
                 </Tab>
-<!--                <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntradaView" text="Entrada">
-                    <content>
-                        <BorderPane id="brdEntrada" fx:id="brdEntrada" prefHeight="200.0" prefWidth="200.0" />
-                    </content>
-                </Tab>-->
                 <Tab id="tabSaida" fx:id="tabSaida" onSelectionChanged="#chamaSaidaView" text="Saída">
                     <content>
                         <BorderPane id="brdSaida" fx:id="brdSaida" prefHeight="200.0" prefWidth="200.0" />

@@ -260,8 +260,8 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
     public String sqlSelectTodos() {
         Field[] fs = o.getClass().getDeclaredFields();
-
-        if (!fs[fs.length - 1].getName().equals(this.inicio)) {
+                
+        if (fs[fs.length - 1].getName().equals("data_saida")) {
             return "SELECT * FROM " + this.banco + "." + this.tabela + " ";
 
         } else {
@@ -406,9 +406,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
 
         Class c = ob.getClass();
         Field[] atributos = c.getDeclaredFields();
-
-//        String sql = "SELECT * FROM " + this.banco + "." + this.tabela
-//                + " WHERE " + this.banco + "." + this.tabela + "." + this.fim + " IS NULL";
+        
         try (PreparedStatement stmt = con.prepareStatement(GenericDAO.this.sqlSelectTodos())) {
 
             if (stmt.execute()) {
@@ -755,8 +753,15 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
         Class c = o.getClass();
         Field[] atributos = c.getDeclaredFields();
 
-        String sql = this.sqlSelectTodos()
-                + " AND " + this.banco + "." + this.tabela + "." + "id" + " = ? ";
+        String sql = this.sqlSelectTodos();
+        
+        if( atributos[atributos.length - 1].getName().equals("data_saida")) {
+            sql+=" WHERE ";
+        } else {
+            sql+=" AND ";
+        }
+                
+                sql+= this.banco + "." + this.tabela + "." + "id" + " = ? ";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
@@ -824,11 +829,7 @@ public abstract class GenericDAO<O extends Object, Z extends Object> implements 
                 + "IS NOT NULL , TRUE , FALSE)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
-//                                for (int i = 0; i < atributos.length; i++) {
-//                        atributos[i].setAccessible(true);
-//                        atributos[i].set(o, rs.getObject(i + 1));
-//                    }
-//                    return fromDB(o);
+            
             for (int i = 0; i < keys.length; i++) {
                 stmt.setObject(i + 1, keys[i]);
             }

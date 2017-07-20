@@ -132,7 +132,8 @@ public class Estaciona {
     @Override
     public String toString() {
 //        return "Estaciona{" + "id=" + id + ", veiculo=" + veiculo + ", valorHora=" + valorHora + ", tolerancia=" + tolerancia + ", valorTotal=" + valorTotal + ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + '}';
-        return veiculo.toString();
+        return veiculo.toString() +"\n"
+                + "Valor Total :";
     }
 
 }

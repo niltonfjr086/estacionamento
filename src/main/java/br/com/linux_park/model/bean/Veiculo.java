@@ -118,7 +118,8 @@ public class Veiculo {
     @Override
     public String toString() {
 //        return "Veiculo{" + "id=" + id + ", placa=" + placa + ", cor=" + cor + ", modelo=" + modelo + ", marca=" + marca + ", dataInclusao=" + dataInclusao + '}';
-        return placa + " " + modelo.getTipoVeiculo() + " " + marca + " " + modelo + " " + cor;
+        return placa + " " + modelo.getTipoVeiculo() + " " + marca + "\n" 
+                + modelo + " " + cor;
     
     }
 
