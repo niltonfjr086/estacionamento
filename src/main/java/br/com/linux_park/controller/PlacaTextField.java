@@ -16,9 +16,6 @@ public class PlacaTextField extends TextField {
 
     private void habilitarPlacaMask(final PlacaTextField inpPlaca) {
 
-        String t = "Testa";
-        System.out.println(t);
-
         inpPlaca.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
