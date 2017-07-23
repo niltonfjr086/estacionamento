@@ -46,7 +46,8 @@ public class PlacaTextField extends TextField {
 //                }
 //
 //
-//                IMPLEMENTAÇÃO SECUNDÁRIA
+//
+//                IMPLEMENTAÇÃO SECUNDÁRIO
                 if (newValue.length() > 0) {
 
                     inpPlaca.setText(formatado(oldValue, newValue).toUpperCase());
