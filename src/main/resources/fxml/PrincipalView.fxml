@@ -8,7 +8,7 @@
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
-                <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntrada2View" text="Entrada">
+                <Tab id="tabEntrada" fx:id="tabEntrada" onSelectionChanged="#chamaEntradaView" text="Entrada">
                     <content>
                         <BorderPane id="brdEntrada2" fx:id="brdEntrada2" prefHeight="200.0" prefWidth="200.0" />
                     </content>

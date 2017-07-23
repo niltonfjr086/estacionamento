@@ -44,7 +44,7 @@ public class EntradaViewController implements Initializable {
     @FXML
     private Label lblPlaca;
     @FXML
-    private TextField txtPlaca;
+    private PlacaTextField txtPlaca;
     @FXML
     private Label lblMarca;
     @FXML
@@ -99,13 +99,14 @@ public class EntradaViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         ev.verificaDadosIniciais();
 
         defineVagasDisponiveis();
         defineConfiguracoes();
 
-        //INICIANDO CHANGE LISTENERS EXPLICITAMENTE NO CONTROLLER
-        habilitarPlacaMask(this.txtPlaca);
+        //INICIANDO CHANGE LISTENERS EXPLICITAMENTE NO CONTROLLER   
+        actionPesquisarPlaca(this.txtPlaca);
         viculaModelosMarca(this.selectOneMarca);
         viculaTipoAoModelo(this.selectOneModelo);
         viculaModelosAoTipo(this.selectOneTipoVeiculo);
@@ -166,44 +167,6 @@ public class EntradaViewController implements Initializable {
         lblMinutosTolerancia.setText(bindTolerancia.getValue());
     }
 
-    private void habilitarPlacaMask(final TextField inpPlaca) {
-        inpPlaca.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-
-                if (newValue.length() == 8) {
-                    actionPesquisarPlaca();
-                }
-
-                if (newValue.length() > 0 && newValue.length() < 4) {
-                    int tecla = newValue.charAt(newValue.length() - 1);
-                    if ((tecla > 64 && tecla < 91) || (tecla > 96 && tecla < 123)) {
-                        inpPlaca.setText(newValue.toUpperCase());
-                    } else {
-                        newValue = oldValue;
-                        inpPlaca.setText(oldValue);
-                    }
-                    if (newValue.length() == 3 && oldValue.length() != 4) {
-                        inpPlaca.setText(newValue.toUpperCase() + "-");
-                    }
-                    if (newValue.length() == 3 && oldValue.length() == 4) {
-                        inpPlaca.setText(newValue.substring(0, 2));
-                    }
-
-                } else if (newValue.length() > 4 && newValue.length() < 9) {
-                    if (!Character.isDigit(newValue.charAt(newValue.length() - 1))) {
-                        inpPlaca.setText(oldValue);
-                    }
-                } else if (newValue.length() > 8) {
-                    inpPlaca.setText(oldValue);
-                } else if (newValue.length() > 0 && newValue.length() < 9) {
-                    inpPlaca.setText(newValue.toUpperCase());
-                }
-            }
-        }
-        );
-    }
-
     private void listas() {
         this.listaMarcas();
         this.listaModelos();
@@ -222,7 +185,11 @@ public class EntradaViewController implements Initializable {
         newMarca.valueProperty().addListener(new ChangeListener<Marca>() {
             @Override
             public void changed(ObservableValue<? extends Marca> observable, Marca oldValue, Marca newValue) {
+
+//                listaTiposVeiculo();
                 listaModelos();
+                selectOneTipoVeiculo.setValue(null);
+                selectOneTipoVeiculo.setDisable(false);
             }
         });
     }
@@ -332,6 +299,20 @@ public class EntradaViewController implements Initializable {
     @FXML
     private void actionPesquisarPlaca(ActionEvent event) {
         actionPesquisarPlaca();
+    }
+
+    //LISTENER - CHANGE IMPLEMENTANDO CLASSE ANÔNIMA SEM ANOTAÇÃO FXML INICIANDO EXPLICITAMENTE NO CONTROLLER
+    private void actionPesquisarPlaca(final TextField inpPlaca) {
+        inpPlaca.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
+
+                if (newValue.length() == 8 && oldValue.length() != 8) {
+                    actionPesquisarPlaca();
+                }
+            }
+        }
+        );
     }
 
     private Boolean validaCampos(Boolean b) {
@@ -497,7 +478,7 @@ public class EntradaViewController implements Initializable {
     }
 
     private void actionLimpar() {
-        this.mainController.chamaEntrada2View();
+        this.mainController.chamaEntradaView();
     }
 
     //LISTENER - ACTION IMPLEMENTANDO ANOTAÇÃO FXML INICIANDO IMPLICITAMENTE

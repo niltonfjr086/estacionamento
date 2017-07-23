@@ -59,16 +59,16 @@ public class PrincipalViewController implements Initializable {
     }
 
     @FXML
-    private void chamaEntrada2View(Event event) {
+    private void chamaEntradaView(Event event) {
         if (brdEntrada2.getCenter() == null) {
-            chamaEntrada2View();
+            chamaEntradaView();
         }
     }
 
-    public void chamaEntrada2View() {
+    public void chamaEntradaView() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/fxml/Entrada2View.fxml"));
+            loader.setLocation(MainApp.class.getResource("/fxml/EntradaView.fxml"));
 
             Parent config = loader.load();
             brdEntrada2.setCenter(config);
